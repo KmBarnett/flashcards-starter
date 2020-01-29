@@ -25,7 +25,7 @@ describe('Round', function() {
     const card3 = new Card(3, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object')
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
-    expect(round.deck).to.deep.equal(deck.cards);
+    expect(round.deck).to.be.an.instanceof(Deck);
   });
 
   it('should be have know what card is has', function() {
@@ -34,7 +34,7 @@ describe('Round', function() {
     const card3 = new Card(3, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object')
     const deck = new Deck([card1, card2, card3]);
     const round = new Round(deck);
-    expect(round.returnCurrentCard()).to.equal(round.deck[0]);
+    expect(round.returnCurrentCard()).to.equal(round.deck.cards[0]);
   });
 
   it('should be able to take a turn', function() {
