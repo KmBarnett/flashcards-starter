@@ -2,7 +2,7 @@ const inquirer = require('inquirer');
 
 const genList = (round) => {
   let card = round.returnCurrentCard();
-  
+
   let choices = card.answers.map((answer, index) => {
     return {
       key: index,
@@ -35,8 +35,13 @@ async function main(round) {
   const getAnswer = await inquirer.prompt(genList(currentRound));
   const getConfirm = await inquirer.prompt(confirmUpdate(getAnswer.answers, round));
 
-    if(!round.returnCurrentCard()) {
+    if (!round.returnCurrentCard() && round.calculatePercentCorrect() > 90) {
       round.endRound();
+    } else if (!round.returnCurrentCard() && round.calculatePercentCorrect() < 90) {
+      round.discardPile.forEach((item) => round.deck.cards.push(item));
+      console.log('You Need More Review');
+      round.endRound();
+      main(round)
     } else {
       main(round);
     }
