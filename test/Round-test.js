@@ -83,6 +83,18 @@ describe('Round', function() {
     expect(round.incorrectGuesses.length).to.equal(1)
   });
 
+  it('should keep track of your wrong awnsers once', function() {
+    const card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object')
+    const deck = new Deck([card1]);
+    const round = new Round(deck);
+    expect(round.incorrectGuesses.length).to.equal(0);
+    round.takeTurn('wrong');
+    expect(round.incorrectGuesses.length).to.equal(1)
+    round.takeTurn('wrong');
+    round.removeRepeats()
+    expect(round.incorrectGuesses.length).to.equal(1)
+  });
+
   it('should be able to tell you how often you were wrong', function() {
     const card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object')
     const card2 = new Card(2, 'What is my name?', ['slim shady', 'sponge bob', 'gary'], 'slim shady')
@@ -92,10 +104,12 @@ describe('Round', function() {
     round.takeTurn('object');
     round.takeTurn('gary');
     round.takeTurn('gold');
-    expect(round.calculatePercentCorrect()).to.equal('66%');
+    expect(round.calculatePercentCorrect()).to.equal(50);
+    round.takeTurn('slim shady');
+    expect(round.calculatePercentCorrect()).to.equal(66);
   });
 
-  it('should be able to tell you how often you were wrong', function() {
+  it('should be able to give you feedback', function() {
     const card1 = new Card(1, 'What allows you to define a set of related information using key-value pairs?', ['object', 'array', 'function'], 'object')
     const card2 = new Card(2, 'What is my name?', ['slim shady', 'sponge bob', 'gary'], 'slim shady')
     const card3 = new Card(3, 'What is my favorite color?', ['black', 'gold', 'silver'], 'gold')
