@@ -13,10 +13,14 @@ restart</p>
 ## Challenges and Wins
 
 ### Challenges
+
   <p>It was really hard not to have a user interface while coding through
   iteration 3 without being able to see what was happening</p>
+
 ### Wins
+
   <p>Once i reach the deployment step my application had almost no bugs</p>
+
 ## Setup
 
 ### Clone down the repo from GitHub
