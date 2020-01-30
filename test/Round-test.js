@@ -67,6 +67,7 @@ describe('Round', function() {
     expect(round.returnCurrentCard()).to.equal(card1);
     round.takeTurn('object');
     expect(round.returnCurrentCard()).to.equal(card2);
+    expect(round.discardPile.length).to.equal(1)
   });
 
   it('should keep track of your wrong awnsers', function() {
@@ -103,7 +104,7 @@ describe('Round', function() {
     round.takeTurn('object');
     round.takeTurn('gary');
     round.takeTurn('gold');
-    expect(round.endRound()).to.equal(`** Round over! ** You answered ${round.calculatePercentCorrect()} of the questions correctly!`);
+    expect(round.endRound()).to.equal(` ${round.writeEndMessage()}`);
   });
 
 });
