@@ -19,7 +19,7 @@ restart</p>
   <p>Once i reach the deployment step my application had almost no bugs</p>
 ## Setup
 
-####Clone down the repo from GitHub
+### Clone down the repo from GitHub
 
 ```bash
 git clone [remote-address]
@@ -31,7 +31,7 @@ git clone [remote-address]
 npm install
 ```
 
-####Run node index.js
+### Run node index.js
 
 ```bash
 node index.js
