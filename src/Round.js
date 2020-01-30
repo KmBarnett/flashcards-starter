@@ -26,6 +26,16 @@ class Round {
     return turn.giveFeedback();
   }
 
+  removeRepeats() {
+    this.incorrectGuesses.sort()
+    this.incorrectGuesses.forEach((item, i) => {if (item === this.incorrectGuesses[i + 1]) {
+      this.incorrectGuesses.splice(i, 1)
+    }
+
+    });
+
+  }
+
   caculateTimeTaken() {
     var startTime = this.start;
     var endTime = Date.now();
@@ -36,14 +46,15 @@ class Round {
   }
 
   calculatePercentCorrect() {
-    let allQuestions = this.turnCount
+    this.removeRepeats()
+    let allQuestions = this.discardPile.length
     let correct = allQuestions - this.incorrectGuesses.length;
-    return `${Math.trunc((correct / allQuestions) * 100)}%`
+    return Math.trunc((correct / allQuestions) * 100)
   }
 
   writeEndMessage() {
-    let repeated = this.turnCount + this.discardPile.length
-    return `You answered ${this.calculatePercentCorrect()} correctly out of ${this.turnCount} total questions awnsered. There were ${this.discardPile.length} cards in this deck you repeated ${repeated}. ${this.caculateTimeTaken()}`
+    let repeated = this.turnCount - this.discardPile.length
+    return `You answered ${this.calculatePercentCorrect()}% correctly questions awnsered. There were ${this.discardPile.length} cards in this deck you repeated ${repeated}. ${this.caculateTimeTaken()}`
   }
 
   endRound() {
